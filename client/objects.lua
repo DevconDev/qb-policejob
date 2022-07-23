@@ -153,6 +153,24 @@ RegisterNetEvent('police:client:spawnLight', function()
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
+RegisterNetEvent('police:client:spawnFirstaid', function()
+    QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {
+        animDict = "anim@narcotics@trash",
+        anim = "drop_front",
+        flags = 16,
+    }, {}, {}, function() -- Done
+        StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
+        TriggerServerEvent("police:server:spawnObject", "firstaid")
+    end, function() -- Cancel
+        StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
+        QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
+    end)
+end)
 
 RegisterNetEvent('police:client:deleteObject', function()
     local objectId, dist = GetClosestPoliceObject()
