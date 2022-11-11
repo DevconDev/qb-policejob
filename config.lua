@@ -6,7 +6,6 @@ Config.Objects = {
     ["roadsign"] = {model = `prop_snow_sign_road_06g`, freeze = true},
     ["tent"] = {model = `prop_gazebo_03`, freeze = true},
     ["light"] = {model = `prop_worklight_03b`, freeze = true},
-    ["firstaid"] = {model = `v_ret_ta_firstaid`, freeze = false},
 }
 
 Config.MaxSpikes = 5

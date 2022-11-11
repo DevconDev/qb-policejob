@@ -40,7 +40,6 @@ local Translations = {
         put_anklet_on = 'Has puesto una tobillera a %{firstname} %{lastname}',
         vehicle_flagged = 'Vehiculo %{plate} Ha sido marcado por %{reason}',
         impound_vehicle_removed = '¡Vehículo sacado del embargo!',
-        impounded = 'Vehículo incautado..',
     },
     info = {
         mr = 'Sr.',
@@ -180,14 +179,10 @@ local Translations = {
         robbing = 'Robando a la persona ...',
         place_object = 'Colocación del objeto ..',
         remove_object = 'Eliminar objeto ..',
-        impound = 'Incautación de vehículo..',
     },
 }
 
-if GetConvar('qb_locale', 'en') == 'es' then
-    Lang = Locale:new({
-        phrases = Translations,
-        warnOnMissing = true,
-        fallbackLang = Lang,
-    })
-end
+Lang = Locale:new({
+    phrases = Translations,
+    warnOnMissing = true
+})

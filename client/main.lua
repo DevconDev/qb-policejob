@@ -21,7 +21,7 @@ local function CreateDutyBlips(playerId, playerLabel, playerJob, playerLocation)
         ShowHeadingIndicatorOnBlip(blip, true)
         SetBlipRotation(blip, math.ceil(playerLocation.w))
         SetBlipScale(blip, 1.0)
-        if playerJob == "police" then
+        if playerJob == "lspd" or playerJob == "bcso" or playerJob == "sast" then
             SetBlipColour(blip, 38)
         else
             SetBlipColour(blip, 5)
@@ -71,7 +71,7 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
         TriggerEvent('qb-clothing:client:loadOutfit', trackerClothingData)
     end
 
-    if PlayerJob and PlayerJob.name ~= "police" then
+    if PlayerJob and PlayerJob.type ~= "leo" then
         if DutyBlips then
             for _, v in pairs(DutyBlips) do
                 RemoveBlip(v)
@@ -99,14 +99,14 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
-    if JobInfo.name == "police" and PlayerJob.name ~= "police" then
+    if JobInfo.type == "leo" and PlayerJob.type ~= "leo" then
         if JobInfo.onduty then
             TriggerServerEvent("QBCore:ToggleDuty")
             onDuty = false
         end
     end
 
-    if JobInfo.name ~= "police" then
+    if JobInfo.type ~= "leo" then
         if DutyBlips then
             for _, v in pairs(DutyBlips) do
                 RemoveBlip(v)
@@ -135,7 +135,7 @@ RegisterNetEvent('police:client:sendBillingMail', function(amount)
 end)
 
 RegisterNetEvent('police:client:UpdateBlips', function(players)
-    if PlayerJob and (PlayerJob.name == 'police' or PlayerJob.name == 'ambulance') and
+    if PlayerJob and (PlayerJob.type == 'leo' or PlayerJob.name == 'ambulance') and
         onDuty then
         if DutyBlips then
             for _, v in pairs(DutyBlips) do
