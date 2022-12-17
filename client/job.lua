@@ -990,7 +990,7 @@ CreateThread(function()
         end
     end)
 
-end
+end)
 
 CreateThread(function()
     -- Evidence Storage
